@@ -20,7 +20,7 @@ class Compound:
         self.Energy_of_first_ionization  = Energy_of_first_ionization
         self.energy_of_second_ionization  = energy_of_second_ionization
         self.standard_potential = standard_potential
-        self.standard_potential = standard_potential
+        self.structure = structure
 
 class Ion:
     def __init__(self, formula, alphas='', name='', charge="", m_mass='', bond='', electronegativity='', density='', melting='', boiling='',
@@ -30,6 +30,20 @@ class Ion:
         self.alphas = alphas
         self.name = name
         self.charge = charge
+        self.m_mass  = m_mass
+        self.bond  = bond
+        self.electronegativity  = electronegativity
+        self.density = density
+        self.melting = melting
+        self.boiling = boiling
+        self.Vanderwaals_radius  = Vanderwaals_radius
+        self.Ionic_radius = Ionic_radius
+        self.Isotopes = Isotopes
+        self.electronic_shell = electronic_shell
+        self.Energy_of_first_ionization  = Energy_of_first_ionization
+        self.energy_of_second_ionization  = energy_of_second_ionization
+        self.standard_potential = standard_potential
+        self.structure = structure
 '''
     P"Al4C3BCl3BeH22HBrCaICa(OH)2CdSCH3CO2HCOCO2CsFCuSFeCl2FeCl3GaBr3HgOHg2OHNO2HNO3H2CO3H2SO3H2SO4H3PO4HC2H3O2HClHClO4HFHIH2SLiClK2SO4KBrKOHMg3N2NaClNaOHNa2ONH3NONO2N2O4N2O5H2OZZnCO3"
     "Al4C3 BCl3 BeH2 2HBr CaICa(OH)2CdSCH3CO2HCOCO2CsFCuSFeCl2FeCl3GaBr3HgOHg2OHNO2HNO3H2CO3H2SO3H2SO4H3PO4HC2H3O2HClHClO4HFHIH2SLiClK2SO4KBrKOHMg3N2NaClNaOHNa2ONH3NONO2N2O4N2O5H2OZZnCO3"
@@ -184,8 +198,6 @@ if __name__ == '__main__':
     # formula, alphas='', name
     print(Al4C3.formula, Al4C3.alphas, Al4C3.name, BCl3.formula, BCl3.alphas, BCl3.name, CaH2PO4.formula, CaH2PO4.alphas, CaH2PO4.name)
 
-
-
     db = shelve.open('chem-ions')
     db['C2H3O2'] = C2H3O2
     db['ClO2'] = ClO2
@@ -207,13 +219,12 @@ if __name__ == '__main__':
     db['NO3'] = NO3
     db['OH'] = OH
 
-
-
-
     db.close()
     print(CuS.formula, CuS.alphas, CuS.name, CuS.charge)
     print(FeCl2.formula, FeCl2.alphas, FeCl2.name, FeCl2.charge)
     print(FeCl3.formula, FeCl3.alphas, FeCl3.name, FeCl3.charge)
+    # desn refers to dictionary, element(symbol/formula), symbol, name. When an item is selected in a combo box, 
+    # the desn can be used look up the associated symbol/formula or name and fill in the associated combo box.
     desn = {"Al4C3": "aluminum_carbide", "Ar2He2Kr2Ne2Xe2Rn2": "air", "BCl3": "boron_trichloride",
             "CH4":  "methane", "C2H6": "ethane", "C3H8": "propane", "C4H10": "butane",
             "C4H10_M": "2-methylpropane", "C5H12": "pentane", "C6H14": "hexane", "C7H16": "heptane",
@@ -240,8 +251,7 @@ if __name__ == '__main__':
                 "CH": ["CH4", "C2H6", "C3H8", "C4H10", "C4H10_M", "C5H12", "C6H14", "C7H16", "C8H18",
                 "C9H20", "C10H22", "C14H30", "C18H38"]}
 
-    compound_symbols_list= ""      #Al4C3 Ar2He2Kr2Ne2Xe2Rn2 BCl3 CH4 C2H6 C3H8 C4H10 C4H10_M C5H12 C6H14 C7H16 C8H18 C9H20 C10H22 C14H30 C18H38 CaH2PO4 CaI CaOH2 Ca3P2 CdS CsF C6H8O7 CH3CO2H C2H4COH CO CO2 HBr_g HBr_aq HC2H3O2 HCl HCl_g HCl_aq HClO4 HCN H2CO3 HF_g HF_aq HI_g HI_aq HNO2 HNO3 H3PO4 H2S_g H2S_aq H2SO3 H2SO4 IF7 KBr KOH LiCl Mg3N2 NaCl NaHCO3 Na2O NaOH NH3 N2H4 NO NO2 N2O4 N2O N2O5 PF5 SO2 SO3"
-
+    compound_symbols_list= "Al4C3 Ar2He2Kr2Ne2Xe2Rn2 BCl3 CH4 C2H6 C3H8 C4H10 C4H10_M C5H12 C6H14 C7H16 C8H18 C9H20 C10H22 C14H30 C18H38 CaH2PO4 CaI CaOH2 Ca3P2 CdS CsF C6H8O7 CH3CO2H C2H4COH CO CO2 HBr_g HBr_aq HC2H3O2 HCl HCl_g HCl_aq HClO4 HCN H2CO3 HF_g HF_aq HI_g HI_aq HNO2 HNO3 H3PO4 H2S_g H2S_aq H2SO3 H2SO4 IF7 KBr KOH LiCl Mg3N2 NaCl NaHCO3 Na2O NaOH NH3 N2H4 NO NO2 N2O4 N2O N2O5 PF5 SO2 SO3"
 
     for key in desn.keys():
         compound_symbols_list = compound_symbols_list  + "'"+ key + "' "
@@ -256,8 +266,6 @@ if __name__ == '__main__':
     print(compound_names_list)
     print(des_list)
 
-
-
     '''
     #alphabetic list of compounds that have similar alphabetic element lists
     "AlC": "[Al4C3]",
@@ -265,14 +273,6 @@ if __name__ == '__main__':
     "BCl": "[BCl3]",
     "CH": "["CH4", "C2H6", "C3H8", "C4H10", "C4H10_M", "C5H12", "C6H14", "C7H16", "C8H18",
         "C9H20", "C10H22", "C14H30", "C18H38"]"
-
-
-
-
-
-
-
-
 
     H = Element('H','Hydrogen', 1, 1.00794, '1A', 1, 1, 1, 0, 1, 'density', 'a_radius', 'affinity', 'electronegativity',
                 'melting', 'boiling', 'triple', 'e_fusion', 'e_vapor', 'temp_crit', 'press_crit',
